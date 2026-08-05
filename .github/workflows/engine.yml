@@ -1,0 +1,72 @@
+name: Compute Engine
+
+on:
+  repository_dispatch:
+    types: [bash, python]
+
+jobs:
+  execute:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install base tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq jq curl > /dev/null 2>&1
+
+      # ── BASH MODE ──
+      - name: Execute Bash
+        if: github.event.action == 'bash'
+        run: |
+          echo '${{ github.event.client_payload.script }}' | base64 -d > /tmp/run.sh
+          chmod +x /tmp/run.sh
+          echo "=== BASH EXECUTION START ==="
+          bash /tmp/run.sh 2>&1 | tee /tmp/output.txt
+          echo "=== BASH EXECUTION END ==="
+
+      # ── PYTHON MODE ──
+      - name: Install Python deps
+        if: github.event.action == 'python' && github.event.client_payload.requirements != ''
+        run: |
+          echo "Installing: ${{ github.event.client_payload.requirements }}"
+          pip install -q ${{ github.event.client_payload.requirements }}
+
+      - name: Execute Python
+        if: github.event.action == 'python'
+        run: |
+          echo '${{ github.event.client_payload.script }}' | base64 -d > /tmp/run.py
+          echo "=== PYTHON EXECUTION START ==="
+          python3 /tmp/run.py 2>&1 | tee /tmp/output.txt
+          echo "=== PYTHON EXECUTION END ==="
+
+      # ── SAVE OUTPUT ──
+      - name: Save output to repo
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "kai-compute[bot]"
+          git config user.email "kai-compute@users.noreply.github.com"
+          mkdir -p outputs
+          cp /tmp/output.txt outputs/last_output.txt
+          echo "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > outputs/last_run_time.txt
+          echo "${{ github.event.action }}" > outputs/last_run_type.txt
+          git add outputs/
+          git diff-index --quiet HEAD || git commit -m "output: ${{ github.event.action }} run $(date -u +%s) [skip ci]"
+          git push
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: output-${{ github.run_id }}
+          path: /tmp/output.txt
+          retention-days: 1
