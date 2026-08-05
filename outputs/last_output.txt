@@ -1,11 +1,10 @@
 
 [notice] A new release of pip is available: 26.1.2 -> 26.2.1
 [notice] To update, run: pip install --upgrade pip
+2026-08-05 07:18:20,278 - INFO - JobSpy:Linkedin - finished scraping
+Found 22 jobs
+
+1. <built-in method title of str object at 0x7f457bf372e0>
 Traceback (most recent call last):
-  File "<stdin>", line 4, in <module>
-  File "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/jobspy/__init__.py", line 84, in scrape_jobs
-    country_enum = Country.from_string(country_indeed)
-                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/jobspy/model.py", line 176, in from_string
-    raise ValueError(
-ValueError: Invalid country string: 'in'. Valid countries are: argentina, australia, austria, bahrain, bangladesh, belgium, bulgaria, brazil, canada, chile, china, colombia, costa rica, croatia, cyprus, czech republic,czechia, denmark, ecuador, egypt, estonia, finland, france, germany, greece, hong kong, hungary, india, indonesia, ireland, israel, italy, japan, kuwait, latvia, lithuania, luxembourg, malaysia, malta, mexico, morocco, netherlands, new zealand, nigeria, norway, oman, pakistan, panama, peru, philippines, poland, portugal, qatar, romania, saudi arabia, singapore, slovakia, slovenia, south africa, south korea, spain, sweden, switzerland, taiwan, thailand, türkiye,turkey, ukraine, united arab emirates, uk,united kingdom, usa,us,united states, uruguay, venezuela, vietnam, usa/ca, worldwide
+  File "<stdin>", line 14, in <module>
+AttributeError: 'str' object has no attribute 'company'
