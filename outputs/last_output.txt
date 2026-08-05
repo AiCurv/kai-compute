@@ -1,10 +1,12 @@
 
 [notice] A new release of pip is available: 26.1.2 -> 26.2.1
 [notice] To update, run: pip install --upgrade pip
-2026-08-05 07:18:20,278 - INFO - JobSpy:Linkedin - finished scraping
-Found 22 jobs
+Error searching data entry operator: 'str' object has no attribute 'company'
+Error searching back office executive: 'str' object has no attribute 'company'
+Error searching customer support: 'str' object has no attribute 'company'
+Error searching BPO voice: 'str' object has no attribute 'company'
+Error searching telecaller: 'str' object has no attribute 'company'
+Error searching office assistant: 'str' object has no attribute 'company'
+Error searching computer operator: 'str' object has no attribute 'company'
+Total unique jobs found: 0
 
-1. <built-in method title of str object at 0x7f457bf372e0>
-Traceback (most recent call last):
-  File "<stdin>", line 14, in <module>
-AttributeError: 'str' object has no attribute 'company'
