@@ -1,5 +1,7 @@
-Hello from Actions VM!
-Linux runnervmvrwv9 6.17.0-1020-azure #20~24.04.1-Ubuntu SMP Fri Jun 19 20:09:14 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
-Python 3.11.15
-               total        used        free      shared  buff/cache   available
-Mem:            15Gi       1.4Gi        11Gi        42Mi       2.8Gi        14Gi
+
+[notice] A new release of pip is available: 26.1.2 -> 26.2.1
+[notice] To update, run: pip install --upgrade pip
+2026-08-05 07:15:52,374 - ERROR - JobSpy:ZipRecruiter - ZipRecruiter response status code 403 with response: {"status_code":403,"error_code":"forbidden cf-waf","error_message":"Forbidden"}
+2026-08-05 07:15:52,633 - INFO - JobSpy:Linkedin - finished scraping
+Found 0 jobs
+
